@@ -15,4 +15,38 @@ export const SubcriptionPackageController = {
       )
     );
   },
+
+  update: async (req: Request, res: Response) => {
+    const packageId = req.params.packageId;
+    const rawData = req.body;
+    const updatedPackage = await SubcriptionPackageService.update(
+      packageId,
+      rawData
+    );
+    return res.json(
+      successResponse(
+        HttpStatus.OK,
+        "Subscription Package updated successfully",
+        updatedPackage
+      )
+    );
+  },
+  permissionFeatures: async (req: Request, res: Response) => {
+    const { type, packageId, features } = req.body;
+    if (type === "add") {
+      await SubcriptionPackageService.addFeaturesToPackage(packageId, features);
+      return res.json(
+        successResponse(HttpStatus.OK, "Features added successfully")
+      );
+    }
+    if (type === "remove") {
+      await SubcriptionPackageService.removeFeaturesFromPackage(
+        packageId,
+        features
+      );
+      return res.json(
+        successResponse(HttpStatus.OK, "Features removed successfully")
+      );
+    }
+  },
 };

@@ -6,11 +6,15 @@ import authRoutes from "./auth.route";
 import postRoutes from "./post.route";
 import packageRoutes from "./subcription-package.route";
 import familyRoutes from "./family.route";
+import userRoutes from "./user.route";
+import featureRoutes from "./feature.route";
 
 export const mainRoutes = (app: any) => {
   app.use("/", authRoutes);
-  app.use("/post", postRoutes);
+  app.use("/user", userRoutes);
   app.use("/package", packageRoutes);
+  app.use("/feature", featureRoutes);
+  app.use("/post", postRoutes);
   app.use("/family", familyRoutes);
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err?.name === "MongoServerError") {

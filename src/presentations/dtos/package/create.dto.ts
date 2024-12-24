@@ -1,26 +1,7 @@
-// name
-// features
-// maxMembers
-// price
-// duration
-
-import {
-  ArrayNotEmpty,
-  IsArray,
-  IsBoolean,
-  IsEnum,
-  IsNotEmpty,
-  IsString,
-} from "class-validator";
+import { ArrayNotEmpty, IsArray, IsNotEmpty, IsString } from "class-validator";
 import { Features } from "../../../domain/enums/features.enum";
+import { Types } from "mongoose";
 
-class featureDTO {
-  @IsEnum(Features, { message: "Invalid feature name" })
-  featureName!: Features;
-
-  @IsBoolean()
-  isEnabled!: boolean;
-}
 export class createPackageDTO {
   @IsString()
   @IsNotEmpty({ message: "Name is required" })
@@ -28,8 +9,7 @@ export class createPackageDTO {
 
   @IsArray()
   @ArrayNotEmpty({ message: "Features cannot be empty" })
-  @IsEnum(Features, { each: true, message: "Invalid feature(s) provided" })
-  features!: featureDTO[];
+  features!: Types.ObjectId[];
 
   @IsNotEmpty()
   maxMembers!: number;

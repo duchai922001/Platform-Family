@@ -1,9 +1,8 @@
-import { Document } from "mongoose";
-import { Features } from "../domain/enums/features.enum";
+import { Document, Types } from "mongoose";
 
 export interface ISubscriptionPackage extends Document {
   name: string;
-  features: Features[];
+  features: Types.ObjectId[];
   maxMembers: number;
   price: number;
   duration: number;

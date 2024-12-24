@@ -8,7 +8,10 @@ export const transformAndValidate =
   async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const dtoInstance = plainToInstance(DtoClass, req.body);
-      const errors = await validate(dtoInstance);
+      const errors = await validate(dtoInstance, {
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      });
       if (errors.length > 0) {
         const formattedErrors = formatValidationErrors(errors);
         res.status(HttpStatus.BAD_REQUEST).json({
