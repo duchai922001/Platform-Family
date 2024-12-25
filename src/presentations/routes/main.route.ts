@@ -8,13 +8,19 @@ import packageRoutes from "./subcription-package.route";
 import familyRoutes from "./family.route";
 import userRoutes from "./user.route";
 import featureRoutes from "./feature.route";
+import instanceRoutes from "./subcription-instance.route";
+import commentRoutes from "./comment.route";
+import schedulerRoutes from "./scheduler.route";
 
 export const mainRoutes = (app: any) => {
   app.use("/", authRoutes);
   app.use("/user", userRoutes);
   app.use("/package", packageRoutes);
+  app.use("/instance", instanceRoutes);
   app.use("/feature", featureRoutes);
+  app.use("/scheduler", schedulerRoutes);
   app.use("/post", postRoutes);
+  app.use("/comment", commentRoutes);
   app.use("/family", familyRoutes);
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err?.name === "MongoServerError") {

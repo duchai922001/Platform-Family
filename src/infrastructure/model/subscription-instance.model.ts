@@ -1,6 +1,7 @@
 import { Schema, model } from "mongoose";
+import { ISubscriptionInstance } from "../../types/subscription-instance.interface";
 
-const SubscriptionInstanceSchema = new Schema(
+const SubscriptionInstanceSchema = new Schema<ISubscriptionInstance>(
   {
     customerId: {
       type: Schema.Types.ObjectId,
@@ -12,6 +13,9 @@ const SubscriptionInstanceSchema = new Schema(
       ref: "SubscriptionPackage",
       required: true,
     }, // Gói dịch vụ
+    usedFeatures: [
+      { type: Schema.Types.ObjectId, ref: "Feature", required: true },
+    ],
     familyId: { type: Schema.Types.ObjectId, ref: "Family", required: true }, // Gắn với một gia đình
     startDate: { type: Date, required: true }, // Ngày bắt đầu
     endDate: { type: Date, required: true }, // Ngày hết hạn
@@ -23,7 +27,7 @@ const SubscriptionInstanceSchema = new Schema(
   }
 );
 
-export const SubscriptionInstance = model(
+export const SubscriptionInstance = model<ISubscriptionInstance>(
   "SubscriptionInstance",
   SubscriptionInstanceSchema
 );

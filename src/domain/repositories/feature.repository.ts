@@ -3,4 +3,5 @@ import { IFeature } from "../../types/feature.interface";
 
 export interface IFeatureRepository {
   createFeature(feature: createFeatureDTO): Promise<IFeature>;
+  findById(featureId: string): Promise<IFeature | null>;
 }

@@ -15,4 +15,41 @@ export const FamilyController = {
       )
     );
   },
+  addNewMembers: async (req: Request, res: Response) => {
+    const rawData = req.body;
+    const membersNew = await FamilyService.addMember(
+      rawData.familyId,
+      rawData.members
+    );
+    res.json(
+      successResponse(HttpStatus.OK, "Members added successfully", membersNew)
+    );
+  },
+
+  removeMembers: async (req: Request, res: Response) => {
+    const rawData = req.body;
+    const removeMembers = await FamilyService.removeMembers(
+      rawData.familyId,
+      rawData.members
+    );
+    res.json(
+      successResponse(
+        HttpStatus.OK,
+        "Members removed successfully",
+        removeMembers
+      )
+    );
+  },
+
+  featuresFamily: async (req: Request, res: Response) => {
+    const familyId = req.body.family;
+    const featureOfFamily = await FamilyService.featuresFamily(familyId);
+    res.json(
+      successResponse(
+        HttpStatus.OK,
+        "Featured family successfully",
+        featureOfFamily
+      )
+    );
+  },
 };

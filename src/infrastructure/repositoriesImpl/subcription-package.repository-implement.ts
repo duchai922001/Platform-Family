@@ -10,6 +10,9 @@ import { BadRequestException } from "../../domain/exceptions/bad-request.excepti
 export class SubscriptionPackageRepositoryImpl
   implements SubscriptionPackageRepository
 {
+  findPackageById(packageId: string): Promise<ISubscriptionPackage | null> {
+    return SubscriptionPackage.findById(packageId);
+  }
   async permissionFeatures(
     packageId: string,
     features: (string | Types.ObjectId)[],
@@ -25,12 +28,17 @@ export class SubscriptionPackageRepositoryImpl
       );
 
       if (action === "add") {
-        packageToUpdate.features = [
-          ...new Set([...packageToUpdate.features, ...objectIds]),
-        ];
+        const existingFeatures = packageToUpdate.features.map((feature) =>
+          feature.toString()
+        );
+
+        const newFeatures = objectIds.filter(
+          (feature) => !existingFeatures.includes(feature.toString())
+        );
+        packageToUpdate.features.push(...newFeatures);
       } else if (action === "remove") {
-        packageToUpdate.features = packageToUpdate.features.filter((feature) =>
-          objectIds.includes(feature)
+        packageToUpdate.features = packageToUpdate.features.filter(
+          (feature) => !objectIds.some((id) => feature.equals(id))
         );
       } else {
         throw new BadRequestException("Invalid action. Use 'add' or 'remove'.");
