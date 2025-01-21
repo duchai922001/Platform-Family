@@ -6,6 +6,9 @@ import { IUpdateScheduler } from "../../types/scheduler/update-scheduler.interfa
 import { Scheduler } from "../model/scheduler.model";
 
 export class SchedulerRepositoryImpl implements SchedulerRepository {
+  deleteScheduler(schedulerId: string): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
   updateScheduler(
     schedulerId: string,
     data: IUpdateScheduler
