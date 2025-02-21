@@ -10,4 +10,5 @@ export interface SchedulerRepository {
     data: IUpdateScheduler
   ): Promise<IScheduler | null>;
   deleteScheduler(schedulerId: string): Promise<boolean>;
+  getSchedulerFamily(familyId: string): Promise<IScheduler[]>;
 }

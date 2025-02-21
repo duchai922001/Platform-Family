@@ -17,4 +17,9 @@ schedulerRoutes.put(
   transformAndValidate(updateSchedulerDTO),
   catchAsync(SchedulerController.updateScheduler)
 );
+schedulerRoutes.get(
+  "/:familyId",
+  catchAsync(SchedulerController.getSchedulerFamily)
+);
+
 export default schedulerRoutes;

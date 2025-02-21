@@ -30,4 +30,9 @@ familyRoutes.post(
   transformAndValidate(featureFamilyDTO),
   catchAsync(FamilyController.featuresFamily)
 );
+
+familyRoutes.get(
+  "/get-members/:familyId",
+  catchAsync(FamilyController.getMembersFamily)
+);
 export default familyRoutes;

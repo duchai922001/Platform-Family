@@ -71,4 +71,7 @@ export const FamilyService = {
       description: item?.description,
     }));
   },
+  getMembersOfFamily: async (familyId: string) => {
+    return await FamilyRepo.getMembersFamily(familyId);
+  },
 };

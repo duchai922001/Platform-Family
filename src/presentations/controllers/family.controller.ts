@@ -52,4 +52,11 @@ export const FamilyController = {
       )
     );
   },
+  getMembersFamily: async (req: Request, res: Response) => {
+    const { familyId } = req.params;
+    const members = await FamilyService.getMembersOfFamily(familyId);
+    return res.json(
+      successResponse(HttpStatus.OK, "Get members success", members)
+    );
+  },
 };

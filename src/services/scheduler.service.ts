@@ -31,4 +31,8 @@ export const SchedulerService = {
   updateScheduler: async (schedulerId: string, data: IUpdateScheduler) => {
     return await schedulerRepo.updateScheduler(schedulerId, data);
   },
+
+  getSchedulerFamily: async (familyId: string) => {
+    return await schedulerRepo.getSchedulerFamily(familyId);
+  },
 };

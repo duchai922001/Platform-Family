@@ -11,6 +11,7 @@ import featureRoutes from "./feature.route";
 import instanceRoutes from "./subcription-instance.route";
 import commentRoutes from "./comment.route";
 import schedulerRoutes from "./scheduler.route";
+import albumRoutes from "./album.route";
 
 export const mainRoutes = (app: any) => {
   app.use("/", authRoutes);
@@ -22,6 +23,7 @@ export const mainRoutes = (app: any) => {
   app.use("/post", postRoutes);
   app.use("/comment", commentRoutes);
   app.use("/family", familyRoutes);
+  app.use("/album", albumRoutes);
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err?.name === "MongoServerError") {
       const badRequestException = new BadRequestException(err.message);

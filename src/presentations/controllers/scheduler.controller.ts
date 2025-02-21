@@ -30,4 +30,12 @@ export const SchedulerController = {
       )
     );
   },
+  getSchedulerFamily: async (req: Request, res: Response) => {
+    const { familyId } = req.params;
+    const schedulers = await SchedulerService.getSchedulerFamily(familyId);
+
+    return res.json(
+      successResponse(HttpStatus.OK, "Get Scheduler Success", schedulers)
+    );
+  },
 };

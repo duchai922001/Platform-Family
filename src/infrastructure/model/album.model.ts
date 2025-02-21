@@ -4,8 +4,9 @@ const AlbumSchema = new Schema(
   {
     title: { type: String, required: true }, // Tên album
     description: { type: String, default: "" }, // Mô tả album
-    createdBy: { type: Types.ObjectId, ref: "User", required: true }, // Người tạo album
-    photos: [{ type: Types.ObjectId, ref: "Photo" }], // Mảng các ảnh trong album
+    createdBy: { type: String, required: true }, // Người tạo album
+    photos: [{ type: String }], // Mảng các ảnh trong album
+    familyId: { type: String, required: true },
   },
   {
     timestamps: true,
