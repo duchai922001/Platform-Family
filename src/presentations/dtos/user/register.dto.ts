@@ -6,8 +6,7 @@ export class RegisterDTO {
   email!: string;
 
   @IsString()
-  @IsNotEmpty({ message: "Name is required" })
-  name!: string;
+  name?: string;
 
   @IsString()
   @IsNotEmpty({ message: "Password is required" })
