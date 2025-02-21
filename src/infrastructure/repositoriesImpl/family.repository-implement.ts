@@ -9,16 +9,23 @@ import { Family } from "../model/family.model";
 import { User } from "../model/user.model";
 
 export class FamilyRepositoryImpl implements FamilyRepository {
-  async getMembersFamily(familyId: string): Promise<IUser[]> {
+  async getMembersFamily(
+    familyId: string
+  ): Promise<{ admin: IUser | null; members: IUser[] }> {
     const family = await Family.findById(familyId);
     if (!family) {
       throw new NotFoundException("Family not found");
     }
+    const admin = await User.findById(family.admin).exec();
     const memberIds = family.members.map(
       (id) => new mongoose.Types.ObjectId(id)
     );
+
     const members = await User.find({ _id: { $in: memberIds } }).exec();
-    return members;
+    return {
+      admin,
+      members,
+    };
   }
   removeMembers(familyId: string, members: string[]): Promise<IFamily | null> {
     return Family.findByIdAndUpdate(
