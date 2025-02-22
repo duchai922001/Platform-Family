@@ -14,6 +14,7 @@ postRoutes.post(
 );
 
 postRoutes.get("/posts-family", catchAsync(PostController.getPostByFamily));
+postRoutes.get("/posts-public", catchAsync(PostController.getPostsPublic));
 postRoutes.put(
   "/update",
   transformAndValidate(updatePostDTO),

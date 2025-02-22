@@ -1,3 +1,4 @@
+import { randomBytes } from "crypto";
 import { BadRequestException } from "../domain/exceptions/bad-request.exception";
 import { NotFoundException } from "../domain/exceptions/not-found.exception";
 import { FamilyRepositoryImpl } from "../infrastructure/repositoriesImpl/family.repository-implement";
@@ -6,6 +7,7 @@ import { SubscriptionInstanceRepositoryImpl } from "../infrastructure/repositori
 import { createFamilyDTO } from "../presentations/dtos/family/create.dto";
 import { IFamily } from "../types/family.interface";
 import { createAndValidateDto } from "../utils/createAndValidateDto";
+import { JoinFamilyDTO } from "../presentations/dtos/family/join-family.dto";
 
 const FamilyRepo = new FamilyRepositoryImpl();
 const InstanceRepo = new SubscriptionInstanceRepositoryImpl();
@@ -16,6 +18,18 @@ export const FamilyService = {
     if (familyData.members.length > 2) {
       throw new BadRequestException("Family can have only 2 members");
     }
+    let uniqueCode: string = "";
+    let isUnique = false;
+
+    while (!isUnique) {
+      uniqueCode = randomBytes(4).toString("hex").toUpperCase();
+      const existingFamily = await FamilyRepo.checkUniqueNumberCode(uniqueCode);
+      if (!existingFamily) {
+        isUnique = true;
+      }
+    }
+
+    familyData.codeNumber = uniqueCode;
     const newFamily = await FamilyRepo.create(familyData);
     return newFamily;
   },
@@ -73,5 +87,20 @@ export const FamilyService = {
   },
   getMembersOfFamily: async (familyId: string) => {
     return await FamilyRepo.getMembersFamily(familyId);
+  },
+  joinFamily: async (userId: string, data: any) => {
+    const dataDTO = await createAndValidateDto(JoinFamilyDTO, data);
+    const family = await FamilyRepo.checkUniqueNumberCode(dataDTO.codeNumber);
+    if (!family) {
+      throw new NotFoundException("Mã code không hợp lệ.");
+    }
+    if ((family.members ?? []).includes(userId)) {
+      throw new BadRequestException(
+        "Người dùng đã là thành viên của gia đình này."
+      );
+    }
+
+    family.members = [...(family.members ?? []), userId];
+    return await family.save();
   },
 };

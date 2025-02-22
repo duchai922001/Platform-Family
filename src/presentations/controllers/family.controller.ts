@@ -59,4 +59,10 @@ export const FamilyController = {
       successResponse(HttpStatus.OK, "Get members success", members)
     );
   },
+
+  joinFamily: async (req: Request, res: Response) => {
+    const user = res.locals.user;
+    await FamilyService.joinFamily(user.userId, req.body);
+    return res.json(successResponse(HttpStatus.OK, "Join Family Success"));
+  },
 };

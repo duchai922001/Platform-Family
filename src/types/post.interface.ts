@@ -6,4 +6,5 @@ export interface IPost extends Document {
   images?: string[];
   comments?: Types.ObjectId[];
   familyId: Types.ObjectId;
+  isPrivate: Boolean;
 }

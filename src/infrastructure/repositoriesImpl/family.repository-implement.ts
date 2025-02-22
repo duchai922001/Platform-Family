@@ -9,6 +9,9 @@ import { Family } from "../model/family.model";
 import { User } from "../model/user.model";
 
 export class FamilyRepositoryImpl implements FamilyRepository {
+  async checkUniqueNumberCode(codeNumber: string): Promise<IFamily | null> {
+    return await Family.findOne({ codeNumber });
+  }
   async getMembersFamily(
     familyId: string
   ): Promise<{ admin: IUser | null; members: IUser[] }> {

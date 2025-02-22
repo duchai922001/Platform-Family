@@ -1,4 +1,10 @@
-import { IsArray, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import {
+  IsArray,
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from "class-validator";
 
 export class newPostDTO {
   @IsString()
@@ -16,4 +22,8 @@ export class newPostDTO {
   @IsString()
   @IsNotEmpty({ message: "familyId is required" })
   familyId!: string;
+
+  @IsBoolean()
+  @IsOptional()
+  isPrivate?: boolean;
 }

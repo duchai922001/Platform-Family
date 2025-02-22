@@ -25,4 +25,7 @@ export const PostService = {
   deletePost: async (postId: string) => {
     return await postRepo.deletePost(postId);
   },
+  getPostsPublic: async () => {
+    return await postRepo.getPostsPublic();
+  },
 };

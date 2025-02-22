@@ -5,6 +5,8 @@ import { catchAsync } from "../../utils/catchAsync";
 import { FamilyController } from "../controllers/family.controller";
 import { addAndRemoveMemberDTO } from "../dtos/family/add-member.dto";
 import { featureFamilyDTO } from "../dtos/family/feature-family.dto";
+import { verifyToken } from "../../middlewares/verify.middlewares";
+import { JoinFamilyDTO } from "../dtos/family/join-family.dto";
 const familyRoutes = Router();
 
 familyRoutes.post(
@@ -34,5 +36,12 @@ familyRoutes.post(
 familyRoutes.get(
   "/get-members/:familyId",
   catchAsync(FamilyController.getMembersFamily)
+);
+
+familyRoutes.post(
+  "/join-family",
+  verifyToken,
+  transformAndValidate(JoinFamilyDTO),
+  catchAsync(FamilyController.joinFamily)
 );
 export default familyRoutes;

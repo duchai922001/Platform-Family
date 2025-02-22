@@ -7,6 +7,7 @@ const PostSchema = new Schema<IPost>(
     content: { type: String, required: true },
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }], // Các bình luận
     familyId: { type: Schema.Types.ObjectId, ref: "Family", required: true },
+    isPrivate: { type: Boolean, default: false },
   },
   {
     timestamps: true,

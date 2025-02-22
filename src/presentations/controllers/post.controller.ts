@@ -43,4 +43,11 @@ export const PostController = {
       successResponse(HttpStatus.OK, "Post deleted successfully", {})
     );
   },
+
+  getPostsPublic: async (req: Request, res: Response) => {
+    const posts = await PostService.getPostsPublic();
+    return res.json(
+      successResponse(HttpStatus.OK, "Get data successfully", posts)
+    );
+  },
 };

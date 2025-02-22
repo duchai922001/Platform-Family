@@ -6,4 +6,5 @@ export interface IPostRepository {
   findPostByFamilyId(familyId: string): Promise<IPost[]>;
   updatePost(postId: string, post: IUpdatePost): Promise<IPost | null>;
   deletePost(postId: string): Promise<void | null>;
+  getPostsPublic(): Promise<IPost[]>;
 }
