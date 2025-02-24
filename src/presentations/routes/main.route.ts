@@ -15,6 +15,7 @@ import albumRoutes from "./album.route";
 import uploadImageRoutes from "./upload-image.route";
 import { Server } from "socket.io";
 import { locationRoutes } from "./location.route";
+import groupRoutes from "./group.route";
 
 export const mainRoutes = (app: Application, io: Server) => {
   app.use("/", authRoutes);
@@ -28,6 +29,7 @@ export const mainRoutes = (app: Application, io: Server) => {
   app.use("/family", familyRoutes);
   app.use("/location", locationRoutes(io));
   app.use("/album", albumRoutes);
+  app.use("/group", groupRoutes);
   app.use("/upload", uploadImageRoutes);
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err?.name === "MongoServerError") {
