@@ -9,6 +9,12 @@ import { Family } from "../model/family.model";
 import { User } from "../model/user.model";
 
 export class FamilyRepositoryImpl implements FamilyRepository {
+  async findFamilyOfMember(userId: string): Promise<IFamily[]> {
+    return await Family.find({ members: userId });
+  }
+  async findFamilyOfAdmin(userId: string): Promise<IFamily[]> {
+    return await Family.find({ admin: userId });
+  }
   async checkUniqueNumberCode(codeNumber: string): Promise<IFamily | null> {
     return await Family.findOne({ codeNumber });
   }

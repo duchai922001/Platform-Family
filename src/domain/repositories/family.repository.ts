@@ -16,4 +16,6 @@ export interface FamilyRepository {
     familyId: string
   ): Promise<{ admin: IUser | null; members: IUser[] }>;
   checkUniqueNumberCode(codeNumber: string): Promise<IFamily | null>;
+  findFamilyOfMember(userId: string): Promise<IFamily[]>;
+  findFamilyOfAdmin(userId: string): Promise<IFamily[]>;
 }

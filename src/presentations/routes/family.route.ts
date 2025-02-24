@@ -44,4 +44,10 @@ familyRoutes.post(
   transformAndValidate(JoinFamilyDTO),
   catchAsync(FamilyController.joinFamily)
 );
+
+familyRoutes.get(
+  "/get-family-user",
+  verifyToken,
+  catchAsync(FamilyController.getFamilyOfUser)
+);
 export default familyRoutes;

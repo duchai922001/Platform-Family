@@ -101,6 +101,17 @@ export const FamilyService = {
     }
 
     family.members = [...(family.members ?? []), userId];
-    return await family.save();
+    await family.save();
+
+    return { familyId: family._id };
+  },
+
+  getFamilyOfUser: async (userId: string) => {
+    const familyOfMember = await FamilyRepo.findFamilyOfMember(userId);
+    const familyOfAdmin = await FamilyRepo.findFamilyOfAdmin(userId);
+    const combinedFamilies = [...familyOfMember, ...familyOfAdmin];
+    const result = combinedFamilies.map(({ _id, name }) => ({ _id, name }));
+
+    return result;
   },
 };

@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Application, NextFunction, Request, Response } from "express";
 import { HttpStatus } from "../../domain/enums/http-status.enum";
 import { BadRequestException } from "../../domain/exceptions/bad-request.exception";
 import { HttpException } from "../../domain/exceptions/http.exception";
@@ -13,8 +13,10 @@ import commentRoutes from "./comment.route";
 import schedulerRoutes from "./scheduler.route";
 import albumRoutes from "./album.route";
 import uploadImageRoutes from "./upload-image.route";
+import { Server } from "socket.io";
+import { locationRoutes } from "./location.route";
 
-export const mainRoutes = (app: any) => {
+export const mainRoutes = (app: Application, io: Server) => {
   app.use("/", authRoutes);
   app.use("/user", userRoutes);
   app.use("/package", packageRoutes);
@@ -24,6 +26,7 @@ export const mainRoutes = (app: any) => {
   app.use("/post", postRoutes);
   app.use("/comment", commentRoutes);
   app.use("/family", familyRoutes);
+  app.use("/location", locationRoutes(io));
   app.use("/album", albumRoutes);
   app.use("/upload", uploadImageRoutes);
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {

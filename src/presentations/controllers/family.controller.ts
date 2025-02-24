@@ -62,7 +62,18 @@ export const FamilyController = {
 
   joinFamily: async (req: Request, res: Response) => {
     const user = res.locals.user;
-    await FamilyService.joinFamily(user.userId, req.body);
-    return res.json(successResponse(HttpStatus.OK, "Join Family Success"));
+    const data = await FamilyService.joinFamily(user.userId, req.body);
+    return res.json(
+      successResponse(HttpStatus.OK, "Join Family Success", data)
+    );
+  },
+
+  getFamilyOfUser: async (req: Request, res: Response) => {
+    const user = res.locals.user;
+
+    const data = await FamilyService.getFamilyOfUser(user.userId);
+    return res.json(
+      successResponse(HttpStatus.OK, "Get Families success", data)
+    );
   },
 };
