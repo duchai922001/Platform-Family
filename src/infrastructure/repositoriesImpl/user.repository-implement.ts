@@ -7,7 +7,7 @@ import { UpdateInfoUserDto } from "../../presentations/dtos/user/update-info-use
 
 export class UserRepositoryImpl implements IUserRepository {
   async getAllUser(): Promise<IUser[]> {
-    return await User.find().select("name email createdAt");
+    return await User.find().select("name email avatar createdAt");
   }
   updateUser(
     userId: string,
