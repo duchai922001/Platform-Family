@@ -76,4 +76,11 @@ export const FamilyController = {
       successResponse(HttpStatus.OK, "Get Families success", data)
     );
   },
+  getCodeNumberByFamily: async (req: Request, res: Response) => {
+    const { familyId } = req.params;
+    const data = await FamilyService.getCodeNumberByFamily(familyId);
+    return res.json(
+      successResponse(HttpStatus.OK, "Get Code Number Success", data)
+    );
+  },
 };

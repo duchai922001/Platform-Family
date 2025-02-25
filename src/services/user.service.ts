@@ -9,4 +9,7 @@ export const UserService = {
     const dataUpdateDTO = await createAndValidateDto(UpdateInfoUserDto, data);
     return await UserRepo.updateUser(userId, dataUpdateDTO);
   },
+  getAllUser: async () => {
+    return await UserRepo.getAllUser();
+  },
 };

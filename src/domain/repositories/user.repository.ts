@@ -10,4 +10,5 @@ export interface IUserRepository {
     userId: string,
     data: Partial<UpdateInfoUserDto>
   ): Promise<IUser | null>;
+  getAllUser(): Promise<IUser[]>;
 }

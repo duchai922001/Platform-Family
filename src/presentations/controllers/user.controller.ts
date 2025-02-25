@@ -14,4 +14,10 @@ export const UserController = {
       successResponse(HttpStatus.OK, "User updated successfully", updateUser)
     );
   },
+  getAllUser: async (req: Request, res: Response) => {
+    const data = await UserService.getAllUser();
+    return res.json(
+      successResponse(HttpStatus.OK, "Get data successfully", data)
+    );
+  },
 };

@@ -42,4 +42,7 @@ export const SubcriptionPackageService = {
     const objectIds = features.map((id) => new Types.ObjectId(id));
     return packageRepository.permissionFeatures(packageId, objectIds, "remove");
   },
+  getAllPackage: async () => {
+    return await packageRepository.getAllPackage();
+  },
 };

@@ -5,18 +5,18 @@ import { Post } from "../model/post.model";
 
 export class PostRepositoryImpl implements IPostRepository {
   async getPostsPublic(): Promise<IPost[]> {
-    return await Post.find({ isPrivate: false });
+    return await Post.find({ isPrivate: false }).sort({ createdAt: -1 });
   }
-  deletePost(postId: string): Promise<void | null> {
-    return Post.findByIdAndDelete(postId);
+  async deletePost(postId: string): Promise<void | null> {
+    return await Post.findByIdAndDelete(postId);
   }
-  updatePost(postId: string, post: IUpdatePost): Promise<IPost | null> {
-    return Post.findByIdAndUpdate(postId, post, { new: true });
+  async updatePost(postId: string, post: IUpdatePost): Promise<IPost | null> {
+    return await Post.findByIdAndUpdate(postId, post, { new: true });
   }
-  findPostByFamilyId(familyId: string): Promise<IPost[]> {
-    return Post.find({ familyId });
+  async findPostByFamilyId(familyId: string): Promise<IPost[]> {
+    return await Post.find({ familyId }).sort({ createdAt: -1 });
   }
-  createPost(post: IPost): Promise<IPost> {
-    return Post.create(post);
+  async createPost(post: IPost): Promise<IPost> {
+    return await Post.create(post);
   }
 }

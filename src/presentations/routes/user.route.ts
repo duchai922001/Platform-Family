@@ -12,4 +12,6 @@ userRoutes.put(
   catchAsync(UserController.updateInfoUser)
 );
 
+userRoutes.get("/get-all", catchAsync(UserController.getAllUser));
+
 export default userRoutes;

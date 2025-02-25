@@ -24,4 +24,8 @@ packageRoutes.put(
   transformAndValidate(permissionDTO),
   catchAsync(SubcriptionPackageController.permissionFeatures)
 );
+packageRoutes.get(
+  "/get-all",
+  catchAsync(SubcriptionPackageController.getAllPackage)
+);
 export default packageRoutes;

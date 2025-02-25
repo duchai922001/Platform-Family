@@ -50,4 +50,9 @@ familyRoutes.get(
   verifyToken,
   catchAsync(FamilyController.getFamilyOfUser)
 );
+
+familyRoutes.get(
+  "/get-codeNumber/:familyId",
+  catchAsync(FamilyController.getCodeNumberByFamily)
+);
 export default familyRoutes;

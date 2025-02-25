@@ -114,4 +114,11 @@ export const FamilyService = {
 
     return result;
   },
+  getCodeNumberByFamily: async (familyId: string) => {
+    const family = await FamilyRepo.findFamilyById(familyId);
+    if (!family) {
+      throw new NotFoundException("Không tìm thấy gia đình này");
+    }
+    return family.codeNumber;
+  },
 };

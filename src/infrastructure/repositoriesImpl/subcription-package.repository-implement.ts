@@ -10,6 +10,9 @@ import { BadRequestException } from "../../domain/exceptions/bad-request.excepti
 export class SubscriptionPackageRepositoryImpl
   implements SubscriptionPackageRepository
 {
+  async getAllPackage(): Promise<ISubscriptionPackage[]> {
+    return await SubscriptionPackage.find();
+  }
   findPackageById(packageId: string): Promise<ISubscriptionPackage | null> {
     return SubscriptionPackage.findById(packageId);
   }

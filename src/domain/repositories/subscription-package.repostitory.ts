@@ -16,4 +16,5 @@ export interface SubscriptionPackageRepository {
   ): Promise<boolean>;
   checkFeatureInPackage(featureId: string, packageId: string): Promise<boolean>;
   findPackageById(packageId: string): Promise<ISubscriptionPackage | null>;
+  getAllPackage(): Promise<ISubscriptionPackage[]>;
 }

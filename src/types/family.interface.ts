@@ -5,4 +5,5 @@ export interface IFamily extends Document {
   admin: Types.ObjectId;
   members?: string[];
   subscription: Types.ObjectId;
+  codeNumber?: string | null;
 }

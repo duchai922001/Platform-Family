@@ -49,4 +49,10 @@ export const SubcriptionPackageController = {
       );
     }
   },
+  getAllPackage: async (req: Request, res: Response) => {
+    const data = await SubcriptionPackageService.getAllPackage();
+    return res.json(
+      successResponse(HttpStatus.OK, "Get data successfully", data)
+    );
+  },
 };

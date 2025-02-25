@@ -36,32 +36,38 @@ export class FamilyRepositoryImpl implements FamilyRepository {
       members,
     };
   }
-  removeMembers(familyId: string, members: string[]): Promise<IFamily | null> {
-    return Family.findByIdAndUpdate(
+  async removeMembers(
+    familyId: string,
+    members: string[]
+  ): Promise<IFamily | null> {
+    return await Family.findByIdAndUpdate(
       familyId,
       { $pull: { members: { $in: members } } },
       { new: true }
     );
   }
-  addMembers(familyId: string, members: string[]): Promise<IFamily | null> {
-    return Family.findByIdAndUpdate(
+  async addMembers(
+    familyId: string,
+    members: string[]
+  ): Promise<IFamily | null> {
+    return await Family.findByIdAndUpdate(
       familyId,
       { $push: { members: { $each: members } } },
       { new: true }
     );
   }
-  findFamilyById(familyId: string): Promise<IFamily | null> {
-    return Family.findById(familyId);
+  async findFamilyById(familyId: string): Promise<IFamily | null> {
+    return await Family.findById(familyId);
   }
-  registerInstance(
+  async registerInstance(
     familyId: string,
     data: IUpdateFamilyInstance
   ): Promise<IFamily | null> {
-    return Family.findByIdAndUpdate(familyId, data, {
+    return await Family.findByIdAndUpdate(familyId, data, {
       new: true,
     });
   }
-  create(family: createFamilyDTO): Promise<IFamily> {
-    return Family.create(family);
+  async create(family: createFamilyDTO): Promise<IFamily> {
+    return await Family.create(family);
   }
 }
