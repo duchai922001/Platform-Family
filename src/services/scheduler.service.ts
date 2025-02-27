@@ -12,16 +12,16 @@ const schedulerRepo = new SchedulerRepositoryImpl();
 export const SchedulerService = {
   createScheduler: async (data: createSchedulerDTO) => {
     const schedulerDTO = await createAndValidateDto(createSchedulerDTO, data);
-    const familyExits = await familyRepo.findFamilyById(schedulerDTO.familyId);
-    const converFamilyMembers = familyExits?.members?.map((member) =>
-      member.toString()
-    );
-    const checkMemberExitsInFamily = converFamilyMembers?.includes(
-      schedulerDTO.createdBy
-    );
-    if (!checkMemberExitsInFamily) {
-      throw new BadRequestException("Member not exits in family");
-    }
+    // const familyExits = await familyRepo.findFamilyById(schedulerDTO.familyId);
+    // const converFamilyMembers = familyExits?.members?.map((member) =>
+    //   member.toString()
+    // );
+    // const checkMemberExitsInFamily = converFamilyMembers?.includes(
+    //   schedulerDTO.createdBy
+    // );
+    // if (!checkMemberExitsInFamily) {
+    //   throw new BadRequestException("Member not exits in family");
+    // }
     const newScheduler = {
       ...schedulerDTO,
       date: moment(schedulerDTO.date).format("YYYY-MM-DD HH:mm:ss"),
