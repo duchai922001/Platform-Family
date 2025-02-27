@@ -1,10 +1,18 @@
 import { Schema, model } from "mongoose";
 
-const MessageSchema = new Schema({
-  sender: { type: Schema.Types.ObjectId, ref: "User", required: true }, // Người gửi
-  content: { type: String, required: true },
-  groupId: { type: Schema.Types.ObjectId, ref: "Group", default: null }, // Nhóm tin nhắn
-  createdAt: { type: Date, default: Date.now },
-});
+const MessageSchema = new Schema(
+  {
+    sender: {
+      type: String,
+      required: true,
+    },
+    receiver: {
+      type: String,
+      required: true,
+    },
+    message: { type: String, required: true },
+  },
+  { timestamps: true, versionKey: false }
+);
 
 export const Message = model("Message", MessageSchema);

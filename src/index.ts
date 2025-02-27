@@ -13,7 +13,7 @@ dotenv.config();
 //config cors
 app.use(express.json());
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -29,17 +29,27 @@ connectDB();
 const PORT = process.env.PORT || 5000;
 const server = http.createServer(app);
 const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-  },
+  cors: corsOptions,
 });
 
 mainRoutes(app, io);
+
 io.on("connection", (socket) => {
-  console.log("Client connected:", socket.id);
-  socket.on("disconnect", () => console.log("Client disconnected:", socket.id));
+  console.log(`🔗 Client connected: ${socket.id}`);
+
+  // Lắng nghe sự kiện gửi tin nhắn
+  socket.on("sendMessage", (message) => {
+    console.log(`📩 New message from ${message.sender}: ${message.message}`);
+
+    // Phát tin nhắn tới tất cả client
+    io.emit("receiveMessage", message);
+  });
+
+  socket.on("disconnect", () => {
+    console.log(`❌ Client disconnected: ${socket.id}`);
+  });
 });
+
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

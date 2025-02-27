@@ -17,6 +17,7 @@ import { Server } from "socket.io";
 import { locationRoutes } from "./location.route";
 import groupRoutes from "./group.route";
 import reportRoutes from "./report.route";
+import { messageRoutes } from "./message.route";
 
 export const mainRoutes = (app: Application, io: Server) => {
   app.use("/", authRoutes);
@@ -29,6 +30,7 @@ export const mainRoutes = (app: Application, io: Server) => {
   app.use("/comment", commentRoutes);
   app.use("/family", familyRoutes);
   app.use("/location", locationRoutes(io));
+  app.use("/messages", messageRoutes(io));
   app.use("/album", albumRoutes);
   app.use("/group", groupRoutes);
   app.use("/report", reportRoutes);
