@@ -37,6 +37,16 @@ mainRoutes(app, io);
 io.on("connection", (socket) => {
   console.log(`🔗 Client connected: ${socket.id}`);
 
+  socket.on("joinGroup", (groupId) => {
+    socket.join(groupId);
+    console.log(`📌 User joined group: ${groupId}`);
+  });
+
+  socket.on("sendGroupMessage", (data) => {
+    const { senderId, groupId, message } = data;
+    io.to(groupId).emit("receiveGroupMessage", { senderId, groupId, message });
+  });
+
   // Lắng nghe sự kiện gửi tin nhắn
   socket.on("sendMessage", (message) => {
     console.log(`📩 New message from ${message.sender}: ${message.message}`);

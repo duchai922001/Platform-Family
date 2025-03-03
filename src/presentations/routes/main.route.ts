@@ -18,6 +18,7 @@ import { locationRoutes } from "./location.route";
 import groupRoutes from "./group.route";
 import reportRoutes from "./report.route";
 import { messageRoutes } from "./message.route";
+import { messageGroupRoutes } from "./message-group.route";
 
 export const mainRoutes = (app: Application, io: Server) => {
   app.use("/", authRoutes);
@@ -31,6 +32,7 @@ export const mainRoutes = (app: Application, io: Server) => {
   app.use("/family", familyRoutes);
   app.use("/location", locationRoutes(io));
   app.use("/messages", messageRoutes(io));
+  app.use("/message-group", messageGroupRoutes(io));
   app.use("/album", albumRoutes);
   app.use("/group", groupRoutes);
   app.use("/report", reportRoutes);

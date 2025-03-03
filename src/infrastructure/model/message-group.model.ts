@@ -1,10 +1,12 @@
 import { Schema, model } from "mongoose";
 
-const MessageGroupSchema = new Schema({
-  sender: { type: Schema.Types.ObjectId, ref: "User", required: true }, // Người gửi
-  content: { type: String, required: true },
-  groupId: { type: Schema.Types.ObjectId, ref: "Group", default: null }, // Nhóm tin nhắn
-  createdAt: { type: Date, default: Date.now },
-});
+const MessageGroupSchema = new Schema(
+  {
+    senderId: { type: String, required: true }, // Người gửi
+    message: { type: String, required: true },
+    groupId: { type: String, default: null }, // Nhóm tin nhắn
+  },
+  { timestamps: true, versionKey: false }
+);
 
 export const MessageGroup = model("MessageGroup", MessageGroupSchema);
