@@ -13,5 +13,6 @@ userRoutes.put(
 );
 
 userRoutes.get("/get-all", catchAsync(UserController.getAllUser));
+userRoutes.delete("/delete/:userId", catchAsync(UserController.deleteUser));
 
 export default userRoutes;

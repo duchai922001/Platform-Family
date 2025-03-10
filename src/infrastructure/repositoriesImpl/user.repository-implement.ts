@@ -6,6 +6,9 @@ import { RegisterDTO } from "../../presentations/dtos/user/register.dto";
 import { UpdateInfoUserDto } from "../../presentations/dtos/user/update-info-user.dto";
 
 export class UserRepositoryImpl implements IUserRepository {
+  async deleteUser(userId: string): Promise<boolean | null> {
+    return await User.findByIdAndDelete(userId);
+  }
   async getAllUser(): Promise<IUser[]> {
     return await User.find().select("name email avatar createdAt");
   }

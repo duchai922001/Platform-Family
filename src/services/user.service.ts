@@ -12,4 +12,7 @@ export const UserService = {
   getAllUser: async () => {
     return await UserRepo.getAllUser();
   },
+  deleteUser: async (userId: string) => {
+    return await UserRepo.deleteUser(userId);
+  },
 };

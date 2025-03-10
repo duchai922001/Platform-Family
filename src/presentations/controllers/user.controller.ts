@@ -20,4 +20,9 @@ export const UserController = {
       successResponse(HttpStatus.OK, "Get data successfully", data)
     );
   },
+  deleteUser: async (req: Request, res: Response) => {
+    const { userId } = req.params;
+    await UserService.deleteUser(userId);
+    return res.json(successResponse(HttpStatus.OK, "delete user successfully"));
+  },
 };

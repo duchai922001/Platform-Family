@@ -11,4 +11,5 @@ export interface IUserRepository {
     data: Partial<UpdateInfoUserDto>
   ): Promise<IUser | null>;
   getAllUser(): Promise<IUser[]>;
+  deleteUser(userId: string): Promise<boolean | null>;
 }
