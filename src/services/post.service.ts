@@ -36,6 +36,7 @@ export const PostService = {
     const data = await postRepo.getPosts();
     const mappedData = await Promise.all(
       data.map(async (item) => ({
+        postId: item._id,
         author: await userRepo.findUserById(String(item.author)),
         family: await familyRepo.findFamilyById(String(item.familyId)),
         isPrivate: item.isPrivate,
