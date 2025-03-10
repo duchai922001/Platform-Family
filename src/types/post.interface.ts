@@ -7,4 +7,5 @@ export interface IPost extends Document {
   comments?: Types.ObjectId[];
   familyId: Types.ObjectId;
   isPrivate: Boolean;
+  userLike?: string[];
 }

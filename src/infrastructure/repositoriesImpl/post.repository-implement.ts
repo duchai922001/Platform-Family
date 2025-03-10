@@ -4,6 +4,23 @@ import { IUpdatePost } from "../../types/post/update-post.interface";
 import { Post } from "../model/post.model";
 
 export class PostRepositoryImpl implements IPostRepository {
+  async reactionPost(postId: string, userId: string): Promise<IPost | null> {
+    const findPost = await Post.findById(postId);
+
+    if (!findPost) {
+      throw new Error("Không tìm thấy bài post nào");
+    }
+    const userLikeList = findPost.userLike ?? [];
+    const isLiked = userLikeList.includes(userId);
+
+    return await Post.findByIdAndUpdate(
+      postId,
+      isLiked
+        ? { $pull: { userLike: userId } }
+        : { $addToSet: { userLike: userId } },
+      { new: true }
+    );
+  }
   async getPosts(): Promise<IPost[]> {
     return await Post.find();
   }
@@ -21,5 +38,8 @@ export class PostRepositoryImpl implements IPostRepository {
   }
   async createPost(post: IPost): Promise<IPost> {
     return await Post.create(post);
+  }
+  async findPostById(postId: string): Promise<IPost | null> {
+    return await Post.findById(postId);
   }
 }

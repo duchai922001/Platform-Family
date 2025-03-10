@@ -1,3 +1,4 @@
+import { NotFoundException } from "../domain/exceptions/not-found.exception";
 import { FamilyRepositoryImpl } from "../infrastructure/repositoriesImpl/family.repository-implement";
 import { PostRepositoryImpl } from "../infrastructure/repositoriesImpl/post.repository-implement";
 import { UserRepositoryImpl } from "../infrastructure/repositoriesImpl/user.repository-implement";
@@ -44,5 +45,8 @@ export const PostService = {
       }))
     );
     return mappedData;
+  },
+  reactionPost: async (postId: string, userId: string) => {
+    return await postRepo.reactionPost(postId, userId);
   },
 };

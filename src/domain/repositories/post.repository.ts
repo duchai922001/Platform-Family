@@ -8,4 +8,6 @@ export interface IPostRepository {
   deletePost(postId: string): Promise<void | null>;
   getPostsPublic(): Promise<IPost[]>;
   getPosts(): Promise<IPost[]>;
+  findPostById(postId: string): Promise<IPost | null>;
+  reactionPost(postId: string, userId: string): Promise<IPost | null>;
 }

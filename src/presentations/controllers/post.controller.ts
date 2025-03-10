@@ -56,4 +56,12 @@ export const PostController = {
       successResponse(HttpStatus.OK, "Get data successfully", posts)
     );
   },
+  reactionPost: async (req: Request, res: Response) => {
+    const { postId } = req.params;
+    const user = res.locals.user;
+    await PostService.reactionPost(postId, user.userId);
+    return res.json(
+      successResponse(HttpStatus.OK, "Action reaction successfully")
+    );
+  },
 };
