@@ -28,4 +28,7 @@ export const PostService = {
   getPostsPublic: async () => {
     return await postRepo.getPostsPublic();
   },
+  getPosts: async () => {
+    return await postRepo.getPosts();
+  },
 };

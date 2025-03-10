@@ -7,4 +7,5 @@ export interface IPostRepository {
   updatePost(postId: string, post: IUpdatePost): Promise<IPost | null>;
   deletePost(postId: string): Promise<void | null>;
   getPostsPublic(): Promise<IPost[]>;
+  getPosts(): Promise<IPost[]>;
 }

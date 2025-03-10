@@ -50,4 +50,10 @@ export const PostController = {
       successResponse(HttpStatus.OK, "Get data successfully", posts)
     );
   },
+  getPosts: async (req: Request, res: Response) => {
+    const posts = await PostService.getPosts();
+    return res.json(
+      successResponse(HttpStatus.OK, "Get data successfully", posts)
+    );
+  },
 };

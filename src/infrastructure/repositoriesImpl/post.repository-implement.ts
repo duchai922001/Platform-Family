@@ -4,6 +4,9 @@ import { IUpdatePost } from "../../types/post/update-post.interface";
 import { Post } from "../model/post.model";
 
 export class PostRepositoryImpl implements IPostRepository {
+  async getPosts(): Promise<IPost[]> {
+    return await Post.find();
+  }
   async getPostsPublic(): Promise<IPost[]> {
     return await Post.find({ isPrivate: false }).sort({ createdAt: -1 });
   }
