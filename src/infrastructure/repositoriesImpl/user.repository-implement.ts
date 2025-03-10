@@ -28,4 +28,7 @@ export class UserRepositoryImpl implements IUserRepository {
   async findUserByEmail(email: string): Promise<IUser | null> {
     return User.findOne({ email });
   }
+  async findUserById(userId: string): Promise<IUser | null> {
+    return User.findOne({ _id: userId });
+  }
 }

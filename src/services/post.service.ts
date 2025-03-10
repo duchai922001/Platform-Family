@@ -1,4 +1,6 @@
+import { FamilyRepositoryImpl } from "../infrastructure/repositoriesImpl/family.repository-implement";
 import { PostRepositoryImpl } from "../infrastructure/repositoriesImpl/post.repository-implement";
+import { UserRepositoryImpl } from "../infrastructure/repositoriesImpl/user.repository-implement";
 import { newPostDTO } from "../presentations/dtos/post/create-post.dto";
 import { updatePostDTO } from "../presentations/dtos/post/update-post.dto";
 import { IPost } from "../types/post.interface";
@@ -6,6 +8,8 @@ import { IUpdatePost } from "../types/post/update-post.interface";
 import { createAndValidateDto } from "../utils/createAndValidateDto";
 
 const postRepo = new PostRepositoryImpl();
+const userRepo = new UserRepositoryImpl();
+const familyRepo = new FamilyRepositoryImpl();
 export const PostService = {
   createPost: async (post: newPostDTO): Promise<IPost> => {
     const postDTO = await createAndValidateDto(newPostDTO, post);
@@ -29,6 +33,15 @@ export const PostService = {
     return await postRepo.getPostsPublic();
   },
   getPosts: async () => {
-    return await postRepo.getPosts();
+    const data = await postRepo.getPosts();
+    const mappedData = await Promise.all(
+      data.map(async (item) => ({
+        author: await userRepo.findUserById(String(item.author)),
+        family: await familyRepo.findFamilyById(String(item.familyId)),
+        isPrivate: item.isPrivate,
+        content: item.content,
+      }))
+    );
+    return mappedData;
   },
 };
