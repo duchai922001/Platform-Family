@@ -19,6 +19,7 @@ import groupRoutes from "./group.route";
 import reportRoutes from "./report.route";
 import { messageRoutes } from "./message.route";
 import { messageGroupRoutes } from "./message-group.route";
+import dashboardRoutes from "./dashboard.route";
 
 export const mainRoutes = (app: Application, io: Server) => {
   app.use("/", authRoutes);
@@ -37,6 +38,7 @@ export const mainRoutes = (app: Application, io: Server) => {
   app.use("/group", groupRoutes);
   app.use("/report", reportRoutes);
   app.use("/upload", uploadImageRoutes);
+  app.use("/dashboard", dashboardRoutes);
   app.use((err: any, req: Request, res: Response, next: NextFunction) => {
     if (err?.name === "MongoServerError") {
       const badRequestException = new BadRequestException(err.message);
