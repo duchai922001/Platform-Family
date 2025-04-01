@@ -7,7 +7,7 @@ const SubscriptionPackageSchema = new Schema<ISubscriptionPackage>(
 
     maxMembers: { type: Number, required: true }, // Số lượng thành viên tối đa có thể thêm
     price: { type: Number, required: true }, // Giá gói dịch vụ
-    storage: { type: Number, required: true }, // Thời hạn (tính bằng ngày)
+    storage: { type: String, required: true }, // Thời hạn (tính bằng ngày)
     type: {
       type: String,
       enum: ["basic", "premium", "titanium"],

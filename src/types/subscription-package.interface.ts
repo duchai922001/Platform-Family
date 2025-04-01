@@ -4,6 +4,6 @@ export interface ISubscriptionPackage extends Document {
   name: string;
   maxMembers: number;
   price: number;
-  storage: number;
+  storage: string;
   type: string;
 }

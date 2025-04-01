@@ -14,7 +14,7 @@ export class createPackageDTO {
   price!: number;
 
   @IsNotEmpty()
-  storage!: number;
+  storage!: string;
 
   @IsNotEmpty()
   type!: string;
