@@ -15,6 +15,7 @@ const SubscriptionInstanceSchema = new Schema<ISubscriptionInstance>(
     },
 
     familyId: { type: Schema.Types.ObjectId, ref: "Family", required: true }, // Gắn với một gia đình
+    urlBill: { type: String },
   },
   {
     timestamps: true,

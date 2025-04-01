@@ -12,4 +12,8 @@ export class registerServiceDTO {
   @IsString()
   @IsNotEmpty()
   familyId!: string;
+
+  @IsString()
+  @IsNotEmpty()
+  urlBill!: string;
 }
