@@ -19,11 +19,6 @@ packageRoutes.put(
   catchAsync(SubcriptionPackageController.update)
 );
 
-packageRoutes.put(
-  "/permission",
-  transformAndValidate(permissionDTO),
-  catchAsync(SubcriptionPackageController.permissionFeatures)
-);
 packageRoutes.get(
   "/get-all",
   catchAsync(SubcriptionPackageController.getAllPackage)

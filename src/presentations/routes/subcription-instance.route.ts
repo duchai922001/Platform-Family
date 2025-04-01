@@ -10,4 +10,8 @@ instanceRoutes.post(
   transformAndValidate(registerServiceDTO),
   catchAsync(SubcriptionInstanceController.registerSerivcePacakge)
 );
+instanceRoutes.get(
+  "/",
+  catchAsync(SubcriptionInstanceController.getFamilySubscriptions)
+);
 export default instanceRoutes;

@@ -7,10 +7,6 @@ export class createPackageDTO {
   @IsNotEmpty({ message: "Name is required" })
   name!: string;
 
-  @IsArray()
-  @ArrayNotEmpty({ message: "Features cannot be empty" })
-  features!: Types.ObjectId[];
-
   @IsNotEmpty()
   maxMembers!: number;
 
@@ -18,5 +14,8 @@ export class createPackageDTO {
   price!: number;
 
   @IsNotEmpty()
-  duration!: number;
+  storage!: number;
+
+  @IsNotEmpty()
+  type!: string;
 }

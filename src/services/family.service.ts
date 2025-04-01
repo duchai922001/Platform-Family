@@ -65,26 +65,6 @@ export const FamilyService = {
     return removeMembers;
   },
 
-  featuresFamily: async (familyId: string) => {
-    const instanceSubcription = await InstanceRepo.findByFamilyId(familyId);
-    if (!instanceSubcription) {
-      throw new NotFoundException(
-        "Subscription instance not found for the given family ID"
-      );
-    }
-    const convertFeaturesToString = instanceSubcription?.usedFeatures.map(
-      (feature) => feature.toString()
-    );
-    const features = await Promise.all(
-      convertFeaturesToString.map((featureId) =>
-        featuresRepo.findById(featureId)
-      )
-    );
-    return features.map((item) => ({
-      featureName: item?.featureName,
-      description: item?.description,
-    }));
-  },
   getMembersOfFamily: async (familyId: string) => {
     return await FamilyRepo.getMembersFamily(familyId);
   },

@@ -28,20 +28,7 @@ export const SubcriptionPackageService = {
     );
     return updatedPackage;
   },
-  addFeaturesToPackage: async (
-    packageId: string,
-    features: string[]
-  ): Promise<boolean> => {
-    return packageRepository.permissionFeatures(packageId, features, "add");
-  },
 
-  removeFeaturesFromPackage: async (
-    packageId: string,
-    features: string[]
-  ): Promise<boolean> => {
-    const objectIds = features.map((id) => new Types.ObjectId(id));
-    return packageRepository.permissionFeatures(packageId, objectIds, "remove");
-  },
   getAllPackage: async () => {
     return await packageRepository.getAllPackage();
   },

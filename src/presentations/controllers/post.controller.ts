@@ -7,7 +7,6 @@ import { BadRequestException } from "../../domain/exceptions/bad-request.excepti
 export const PostController = {
   createPost: async (req: Request, res: Response) => {
     const rawData = req.body;
-    console.log({ rawData });
     const newPost = await PostService.createPost(rawData);
     res.json(
       successResponse(HttpStatus.CREATED, "Post created successfully", newPost)

@@ -27,12 +27,6 @@ familyRoutes.post(
   catchAsync(FamilyController.removeMembers)
 );
 
-familyRoutes.post(
-  "/features-family",
-  transformAndValidate(featureFamilyDTO),
-  catchAsync(FamilyController.featuresFamily)
-);
-
 familyRoutes.get(
   "/get-members/:familyId",
   catchAsync(FamilyController.getMembersFamily)

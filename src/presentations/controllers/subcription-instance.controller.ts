@@ -16,4 +16,10 @@ export const SubcriptionInstanceController = {
       )
     );
   },
+  getFamilySubscriptions: async (req: Request, res: Response) => {
+    const data = await SubcriptionInstanceService.getFamilySubscriptions();
+    res.json(
+      successResponse(HttpStatus.CREATED, "Get data successfully", data)
+    );
+  },
 };

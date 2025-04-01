@@ -41,17 +41,6 @@ export const FamilyController = {
     );
   },
 
-  featuresFamily: async (req: Request, res: Response) => {
-    const familyId = req.body.family;
-    const featureOfFamily = await FamilyService.featuresFamily(familyId);
-    res.json(
-      successResponse(
-        HttpStatus.OK,
-        "Featured family successfully",
-        featureOfFamily
-      )
-    );
-  },
   getMembersFamily: async (req: Request, res: Response) => {
     const { familyId } = req.params;
     const members = await FamilyService.getMembersOfFamily(familyId);

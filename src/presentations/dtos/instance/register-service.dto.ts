@@ -3,7 +3,7 @@ import { IsNotEmpty, IsString } from "class-validator";
 export class registerServiceDTO {
   @IsString()
   @IsNotEmpty()
-  customerId!: string;
+  userId!: string;
 
   @IsString()
   @IsNotEmpty()

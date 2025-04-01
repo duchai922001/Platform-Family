@@ -9,12 +9,7 @@ export interface SubscriptionPackageRepository {
     packageId: string,
     data: updatePackageDTO
   ): Promise<ISubscriptionPackage | null>;
-  permissionFeatures(
-    packageId: string,
-    features: string[],
-    action: "add" | "remove"
-  ): Promise<boolean>;
-  checkFeatureInPackage(featureId: string, packageId: string): Promise<boolean>;
+
   findPackageById(packageId: string): Promise<ISubscriptionPackage | null>;
   getAllPackage(): Promise<ISubscriptionPackage[]>;
 }
